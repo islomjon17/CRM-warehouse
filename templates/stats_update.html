@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Products</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<!--
+`body` tag options:
+
+  Apply one or more of the following classes to to the body tag
+  to get the desired effect
+
+  * sidebar-collapse
+  * sidebar-mini
+-->
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Products</h1>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Products</li>
+                                <li class="breadcrumb-item"><a href="{% url 'logout' %}">Logout</a></li>
+                            </ol>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+
+            <!-- Modal Header -->
+
+            <!-- Modal body -->
+            <!-- <form action="{% url 'stats-update' stats.id %}" id="edit-stats-form" method="post">{% csrf_token %}
+           
+            </select>
+            <br>
+            <label for="client">Client:</label>
+            <select name="client" id="client">
+            {% for c in clients %}
+            <option value="{{c.id}}">{{c.ism}} ({{c.dokon_nomi}}, {{c.joylashuv}})</option>
+            {% endfor %}
+            </select>
+                
+                
+                
+                <label for="edit-stats-cl">product nomi:</label>
+                <input type="text" name="product" value="{{stats.product}}" placeholder="Brend nomi..." id="edit-stats-cl" class="form-control" required>
+                <br>
+                
+                
+                <label for="edit-stats-sana">Kelgan sanasi:</label>
+                <input type="number" name="sanasi" value="{{stats.sanasi}}" placeholder="Mahsulot narxi..." id="edit-stats-sana" class="form-control" required>
+                <br>
+                
+                
+                <label for="edit-stats-sana">Miqdor:</label>
+                <input type="number" name="miqdor" value="{{stats.miqdor}}" placeholder="Mahsulot narxi..." id="edit-stats-sana" class="form-control" required>
+                <br>
+                
+                
+                <label for="edit-stats-summa">Umumiy_summa:</label>
+                <input type="number" name="umumiy_summa" value="{{stats.umumiy_summa}}" placeholder="Mahsulot narxi..." id="edit-stats-summa" class="form-control" required>
+                <br>
+                
+                
+                <label for="edit-stats-miqdor">Tolandi:</label>
+                <input type="number" name="tolandi" value="{{stats.tolandi}}" placeholder="Dona qoldi..." id="edit-stats-miqdor" class="form-control" required>
+                <br>
+                
+                
+                <label for="edit-stats-tolandi">Nasiya:</label>
+                <input type="number" name="nasiya" value="{{stats.nasiya}}" placeholder="Dona qoldi..." id="edit-stats-tolandi" class="form-control" required>
+                <br>
+                
+                
+                <label for="edit-stats-nasiya">Omboi:</label>
+                <input type="number" name="ombor" value="{{stats.ombor}}" placeholder="Dona qoldi..." id="edit-stats-nasiya" class="form-control" required>
+                <br>
+
+                <button type="submit" class="btn btn-success">Yangilash</button>
+                <a href="{% url 'mahsulotlar' %}"><button type="button" class="btn btn-danger" data-dismiss="modal">Yopish</button></a>
+
+            </form> -->
+            <form action="{% url 'stats-update' stats.id %}" id="edit-stats-form" method="post">{% csrf_token %}
+                <div class="modal-body">
+                    <label for="product">Product:</label>
+                    <select name="product" id="product">
+        {% for p in products %}
+        <option value="{{p.id}}">{{p.nom}} ({{p.brend_nomi}}, {{p.sotuvdagi_narxi}} so'm)</option>
+        {% endfor %}
+    </select>
+                    <br>
+                    <label for="client">Client:</label>
+                    <select name="client" id="client">
+        {% for c in clients %}
+        <option value="{{c.id}}">{{c.ism}} ({{c.dokon_nomi}}, {{c.joylashuv}})</option>
+        {% endfor %}
+    </select>
+                    <br>
+                    <label for="sanasi">Sana:</label>
+                    <input type="datetime-local" name="sanasi" placeholder="Sana" id="sana" class="form-control" required>
+                    <br>
+                    <label for="miqdor">Miqdor:</label>
+                    <input type="number" name="miqdor" placeholder="Miqdor" id="miqdor" class="form-control" required>
+                    <br>
+                    <label for="umumiy_summa">Umumiy summa:</label>
+                    <input type="number" name="summa" placeholder="Umumiy summa" id="umumiy_summa" class="form-control" required>
+                    <br>
+                    <label for="nasiya">Nasiya:</label>
+                    <input type="number" name="nasiya" placeholder="Nasiya" id="nasiya" class="form-control" required>
+                    <br>
+                    <label for="tolandi">To'landi:</label>
+                    <input type="number" name="tolandi" placeholder="To'landi" id="tolandi" class="form-control" required>
+                    <br>
+                </div>
+
+                <!-- Modal footer -->
+                <button type="submit" class="btn btn-success">Yangilash</button>
+                <a href="{% url 'mahsulotlar' %}"><button type="button" class="btn btn-danger" data-dismiss="modal">Yopish</button></a>
+            </form>
+
+
+
+            <!-- ./wrapper -->
+
+            <!-- REQUIRED SCRIPTS -->
+
+            <!-- jQuery -->
+            <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+            <!-- Bootstrap -->
+            <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+            <!-- AdminLTE -->
+            <script src="{% static 'dist/js/adminlte.js' %}"></script>
+
+            <!-- OPTIONAL SCRIPTS -->
+            <script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="{% static 'dist/js/demo.js' %}"></script>
+            <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+            <script src="{% static 'dist/js/pages/dashboard3.js' %}"></script>
+</body>
+
+</html>     <script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="{% static 'dist/js/demo.js' %}"></script>
+            <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+            <script src="{% static 'dist/js/pages/dashboard3.js' %}"></script>
+</body>
+
+</html>     <script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="{% static 'dist/js/demo.js' %}"></script>
+            <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+            <script src="{% static 'dist/js/pages/dashboard3.js' %}"></script>
+</body>
+
+</html>

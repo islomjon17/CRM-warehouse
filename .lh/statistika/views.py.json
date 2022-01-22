@@ -1,0 +1,18 @@
+{
+    "sourceFile": "statistika/views.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1642333982489,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1642333982489,
+            "name": "Commit-0",
+            "content": "from django.shortcuts import render, redirect\r\nfrom django.views import View\r\nfrom app1.models import Ombor, Client, Product\r\nfrom .models import Stats\r\nfrom django.views.generic import UpdateView\r\n\r\nclass StatsView(View):\r\n    def get(self, request):\r\n        stats = Stats.objects.all()\r\n        o = Ombor.objects.get(user=request.user)\r\n        clients = Client.objects.filter(ombor=o)\r\n        products = Product.objects.filter(ombor=o)\r\n        return render(request, 'stats.html', {\"all_stats\":stats, \"products\":products, \"clients\":clients})\r\n    def post(self, request):\r\n        m = request.POST['miqdor']\r\n        n = request.POST['nasiya']\r\n        p = request.POST[\"product\"]\r\n        c = request.POST[\"client\"]\r\n        Stats.objects.create(\r\n            product=Product.objects.get(id=p),\r\n            client=Client.objects.get(id=c),\r\n            sanasi=request.POST['sana'],\r\n            miqdor=m,\r\n            umumiy_summa=request.POST['summa'],\r\n            nasiya=n,\r\n            tolandi=request.POST['tolandi'],\r\n            ombor=Ombor.objects.get(user=request.user)\r\n        )\r\n        pro = Product.objects.get(id=p)\r\n        pro.miqdor = int(pro.miqdor) - int(m)\r\n        pro.save()\r\n        cl = Client.objects.get(id=c)\r\n        cl.qarz = int(cl.qarz) + int(n)\r\n        cl.save()\r\n        return redirect(\"stats\")\r\n\r\nclass StatsUpdate(View):\r\n    def get(self, request, pk):\r\n        return render(request, 'stats_update.html')"
+        }
+    ]
+}
